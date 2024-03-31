@@ -1,0 +1,16 @@
+.container {
+    height: 90px;
+    background-color: #1a1a1a;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.homeLink,
+.moviesLink {
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+}

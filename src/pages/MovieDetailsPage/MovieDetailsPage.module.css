@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    gap: 70px;
+}
+.backLink{
+    color: white;
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
+.info {
+    color: white;
+    padding-top: 20px;
+}
+
+.links{
+    display: flex;
+    gap: 20px;
+}
+.castLink,
+.reviewsLink{
+    color: white;
+}
