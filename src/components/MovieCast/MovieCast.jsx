@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import styles from './MovieCast.module.css'
+import styles from './MovieCast.module.css';
 
 export default function MovieCast() {
     const [cast, setCast] = useState([]);
+    const [error, setError] = useState(null);
     const { movieId } = useParams(); 
 
     useEffect(() => {
@@ -18,11 +19,15 @@ export default function MovieCast() {
                 setCast(response.data.cast);
             } catch (error) {
                 console.error('Error:', error);
-                throw error;
+                setError('Error fetching movie cast. Please try again later.');
             }
         };
         fetchMovieDetails();
     }, [movieId]);
+
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     return (
         <div>
@@ -31,16 +36,16 @@ export default function MovieCast() {
                 {cast.map((actor, index) => (
                     <li key={index} className={styles.actor}>
                         <div className={styles.actorInfo}>
-                        {actor.profile_path ? (
-                            <img src={`https://image.tmdb.org/t/p/w200/${actor.profile_path}`} className={styles.image} />
+                            {actor.profile_path ? (
+                                <img src={`https://image.tmdb.org/t/p/w200/${actor.profile_path}`} className={styles.image} alt={actor.name} />
                             ) : (
-                            <span className={styles.span}>No photo</span>
+                                <span className={styles.span}>No photo</span>
                             )}
-                        {actor.name}
+                            {actor.name}
                         </div>
                     </li>
                 ))}
             </ul>
         </div>
-    )
+    );
 }

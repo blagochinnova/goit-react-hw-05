@@ -5,6 +5,7 @@ import styles from './MovieReviews.module.css'
 
 export default function MovieReviews() {
     const [reviews, setReviews] = useState([]);
+    const [error, setError] = useState(null); 
     const { movieId } = useParams(); 
 
     useEffect(() => {
@@ -18,11 +19,15 @@ export default function MovieReviews() {
                 setReviews(response.data.results); 
             } catch (error) {
                 console.error('Error:', error);
-                throw error;
+                setError('Error fetching movie reviews. Please try again later.'); 
             }
         };
         fetchMovieDetails();
     }, [movieId]);
+
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     return(
         <div>
